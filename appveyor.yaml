@@ -1,0 +1,29 @@
+version: 1.0.{build}
+image: Visual Studio 2015
+
+environment:
+  ATOM_SHELL_INTERNAL_RUN_AS_NODE: 1
+  VSCODE_BUILD_VERBOSE: true
+
+install:
+- cmd: >-
+    chocolatey install nodejs
+
+    chocolatey install visualstudiocode
+
+    refreshenv
+
+    set PATH
+
+    dir "C:\Program Files (x86)\Microsoft VS Code\bin"
+
+    "C:\Program Files (x86)\Microsoft VS Code\bin\code.cmd" --help
+
+    npm install
+build_script:
+- cmd: npm run vscode:prepublish
+test_script:
+- cmd: >-
+    set PATH
+
+    npm test
